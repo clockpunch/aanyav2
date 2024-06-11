@@ -1,0 +1,17 @@
+- name: Aanya time in weekdays 
+  ansible.builtin.cron:
+    name: "aanya time in weekdays"
+    user: <user>
+    minute: "0"
+    hour: "07"
+    weekday: "1-5"
+    job: "sleep $(( 1$(date +\\%N) \\% 120 )) ; /opt/aanya/venv/bin/python /opt/aanya/clock-in.py >> /opt/aanya/aanya.log"
+
+- name: Aanya time out weekdays
+  ansible.builtin.cron:
+    name: "aanya time out weekdays"
+    user: <user>
+    minute: "0"
+    hour: "16"
+    weekday: "1-5"
+    job: "sleep $(( 1$(date +\\%N) \\% 120 )) ; /opt/aanya/venv/bin/python /opt/aanya/clock-out.py >> /opt/aanya/aanya.log"

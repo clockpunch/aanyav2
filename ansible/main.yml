@@ -1,0 +1,13 @@
+---
+- hosts: <host1>
+  user: <user>
+  become: yes
+  roles:
+    - role: aanya
+      tags: aanya
+
+    - role: aanya-enable
+      tags: aanya-enable
+
+    - role: aanya-disable
+      tags: aanya-disable

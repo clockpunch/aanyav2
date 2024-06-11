@@ -1,0 +1,44 @@
+---
+- name: Ensure /opt/aanya exists
+  file:
+    path: /opt/aanya
+    state: directory
+    owner: <user>
+    group: <group>
+    mode: '0755'
+
+- name: Copy clock-in.py script
+  ansible.builtin.copy:
+    src: files/clock-in.py
+    dest: /opt/aanya/clock-in.py
+    owner: <user>
+    group: <group>
+    mode: '0644'
+
+- name: Copy clock-out.py script
+  ansible.builtin.copy:
+    src: files/clock-out.py
+    dest: /opt/aanya/clock-out.py
+    owner: <user>
+    group: <group>
+    mode: '0644'
+
+- name: Copy requirements.txt
+  ansible.builtin.copy:
+    src: files/requirements.txt
+    dest: /opt/aanya/requirements.txt
+    owner: <user>
+    group: <group>
+    mode: '0644'
+
+- name: Install virtualenv
+  ansible.builtin.apt:
+    name: virtualenv
+    state: latest
+    install_recommends: false
+
+- name: Install specified python requirements in indicated (virtualenv)
+  ansible.builtin.pip:
+    requirements: /opt/aanya/requirements.txt
+    virtualenv: /opt/aanya/venv
+  become: false
