@@ -51,7 +51,8 @@ else:
     response1 = requests.post(
         'https://appv2.aanyahr.com:8000/api/user/authenticateLogin',
         headers=headers1,
-        json=json_data1
+        json=json_data1,
+        timeout=60
     )
 
     response1_json = response1.json()
